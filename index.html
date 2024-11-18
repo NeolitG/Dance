@@ -1,13 +1,60 @@
-   <!DOCTYPE html>
-   <html>
-   <head>
-       <title>Автозапуск видео</title>
-       <meta charset="utf-8">
-   </head>
-   <body>
-       <video width="100%" height="auto" autoplay controls>
-           <source src="https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/i/yrAwhzV9P7g9mg" type="video/mp4">
-           Ваш браузер не поддерживает видео.
-       </video>
-   </body>
-   </html>
+ <html>
+<head>
+</head>
+
+<body>
+
+  <div style="height:60vw;  max-width: 1024px; max-height: 576px; min-height: 240px;">
+    <iframe id="my-player" width="100%" height="100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen allow="clipboard-write; autoplay"
+     src="https://rutube.ru/play/embed/0c0c6fc1eee8c2c40019f94b492124ee?skinColor=7cb342&t=300">
+    </iframe>
+  </div>
+  <p><a href="https://rutube.ru/video/0c0c6fc1eee8c2c40019f94b492124ee/">НОВЫЕ ИСТОРИЧЕСКИЕ СЕРИАЛЫ 2023 | 10 Новых русских исторических сериалов 2023 года</a>
+     от <a href="//rutube.ru/video/person/26967852/">Кинотоп</a> на <a href="https://rutube.ru/">RUTUBE</a>
+
+  <br><br>
+
+  <form id = 'Mark0' action="/styles.css" method="post" id="form1">
+    <input type="button" value="Pause" onclick="do_pause()">
+    <input type="button" value="Play" onclick="do_play()">
+    <input type="button" value="Stop" onclick="do_stop()">
+    <br>
+    <input type="button" value="Relatively Seek -" onclick="do_relativelySeekLeft()">
+    <input type="button" value="Set CurrentTime 60" onclick="do_setCurrentTime()">
+    <input type="button" value="Relatively Seek +" onclick="do_relativelySeekRight()">
+    <br>
+    <input type="button" value="Change Video" onclick="do_changeVideo()">
+    <input type="button" value="Set Skin Color" onclick="do_setSkinColor()">
+    <br>
+    <input type="button" value="Mute" onclick="do_mute()">
+    <input type="button" value="Volume -" onclick="do_VolumeDown()">
+    <input type="button" value="Volume mid" onclick="do_VolumeMid()">
+    <input type="button" value="Volume +" onclick="do_VolumeUp()">
+    <input type="button" value="Unmute" onclick="do_unMute()">
+  </form>
+
+</body>
+
+<script type="text/javascript">
+
+var player = document.getElementById('my-player');
+function doCommand(CommandJSON) {
+	player.contentWindow.postMessage(JSON.stringify(CommandJSON), '*');
+}
+
+function do_play()                { doCommand( {type:'player:play',           data:{}                                     } ); }
+function do_pause()               { doCommand( {type:'player:pause',          data:{}                                     } ); }
+function do_stop()                { doCommand( {type:'player:stop',           data:{}                                     } ); }
+function do_setCurrentTime()      { doCommand( {type:'player:setCurrentTime', data:{time:60}                              } ); }
+function do_relativelySeekRight() { doCommand( {type:'player:relativelySeek', data:{time:60}                              } ); }
+function do_relativelySeekLeft()  { doCommand( {type:'player:relativelySeek', data:{time:-60}                             } ); }
+function do_changeVideo()         { doCommand( {type:'player:changeVideo',    data:{id:'33ad68e44dde6b3453ae4beaeaaf4c29'}} ); }
+function do_setSkinColor()        { doCommand( {type:'player:setSkinColor',   data:{color:'FF00FF'}                       } ); }
+function do_mute()                { doCommand( {type:'player:mute',           data:{}                                     } ); }
+function do_unMute()              { doCommand( {type:'player:unMute',         data:{}                                     } ); }
+function do_VolumeMid()           { doCommand( {type:'player:setVolume',      data:{volume: 0.5}                          } ); }
+function do_VolumeUp()            { doCommand( {type:'player:setVolume',      data:{change: 0.1}                          } ); }
+function do_VolumeDown()          { doCommand( {type:'player:setVolume',      data:{change: -0.1}                         } ); }
+
+</script>
+</html>
